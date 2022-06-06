@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="change_food">pick one</button>
+    <p>{{ food }}</p>
+  </div>
+
+  <hr/>
+
+  <div id="app2">
+    <button v-on:click="get_numbers">get numbers</button>
+    <p>{{ numbers }}</p>
+  </div>
+
+  <hr/>
+
+  <div id="app3">
+    <input v-model="message"/>
+    <p>{{ message }}</p>
+  </div>
+</body>
+<script>
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      foods: ["국밥", "김치찌개", "한식", "국수", "제육볶음"],
+      food: '무슨 음식을 먹을까요 ?',
+    },
+    methods: {
+      change_food: function(event){
+        this.food = this.foods[_.random(4)];
+      }
+    }
+  })
+
+  var app2 = new Vue({
+    el: '#app2',
+    data: {
+      numbers: '',
+    },
+    methods: {
+      get_numbers(){
+        this.numbers = _.sampleSize(_.range(1, 45), 7);
+        this.numbers.sort((a, b) => {
+          return a-b;
+        });
+      }
+    }
+  })
+
+  var app3 = new Vue({
+    el: '#app3',
+    data: {
+      message: '입력하세요',
+    }
+  })
+</script>
+</html>
